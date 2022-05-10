@@ -1,4 +1,5 @@
-FROM mglolenstine/gtk4-cross:%GTKTAG%
+# FROM mglolenstine/gtk4-cross:%GTKTAG%
+FROM ghcr.io/piegamesde/gtk4-cross:%GTKTAG%
 
 # Add build.sh
 ADD build.sh /usr/bin/build
