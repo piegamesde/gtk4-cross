@@ -35,26 +35,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Login to GitHub Container Repository
         uses: docker/login-action@v1
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            mglolenstine/gtk4-cross
-            ghcr.io/mglolenstine/gtk4-cross
+            ghcr.io/piegamesde/gtk4-cross
           tags: |
             ${{ matrix.runtime.name }}
       - name: Write the Dockerfile for the ${{ matrix.runtime.name }} runtime
@@ -75,8 +68,7 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            mglolenstine/gtk4-cross
-            ghcr.io/mglolenstine/gtk4-cross
+            ghcr.io/piegamesde/gtk4-cross
           tags: |
             rust-${{ matrix.runtime.name }}
       - name: Write the Dockerfile for the ${{ matrix.runtime.name }} runtime
